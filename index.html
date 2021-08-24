@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VAT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<main role="main" class="container">
+
+<div class="starter">
+    <h1>Vat Validation</h1>
+
+    <input type="text" id="vat"> <button id="btn-go" onclick="toggleText()">Check!</button>
+
+    <div id="result" style="display: none">
+
+        company_address: <span id="company_address"></span><br>
+        company_name: <span id="company_name"></span><br>
+        company_code: <span id="company_code"></span><br>
+        database: <span id="database"></span><br>
+        format_valid: <span id="format_valid"></span><br>
+        query: <span id="query"></span><br>
+        valid: <span id="valid"></span><br>
+        vat_number: <span id="vat_number"></span><br>
+
+    </div>
+
+</div>
+
+</main><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script>
+    $('#btn-go').on('click', function(){
+        $.post('http://www.apilayer.net/api/validate?access_key=31290c165bd33989c675123be1b66d9d&vat_number=' + $('#vat').val(), {}, function(res){
+            $('#company_address').text(res.company_address)
+            $('#company_name').text(res.company_name)
+            $('#company_code').text(res.company_code)
+            $('#database').text(res.database)
+            $('#format_valid').text(res.format_valid)
+            $('#query').text(res.query)
+            $('#valid').text(res.valid)
+            $('#vat_number').text(res.vat_number)
+        })
+    })
+
+</script>
+
+<script>
+
+    function toggleText() {
+        var text = document.getElementById("result");
+        if (text.style.display === "none") {
+            text.style.display = "block";
+        } else {
+            text.style.display = "none";
+        }
+    }
+
+</script>
+
+</body>
+</html>
